@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_home"
+            android:icon="@drawable/home_icon"
+            android:title="Home" />
+        <item
+            android:id="@+id/drawer_send_survey"
+            android:icon="@drawable/send_icon"
+            android:title="Send Survey" />
+        <item
+            android:id="@+id/drawer_make_draft"
+            android:icon="@drawable/draft_icon"
+            android:title="Make Draft" />
+        <item
+            android:id="@+id/drawer_my_surveys"
+            android:icon="@drawable/mine_icon"
+            android:title="My Surveys" />
+    </group>
+</menu>
