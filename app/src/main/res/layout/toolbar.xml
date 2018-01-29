@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    app:navigationIcon="@drawable/menu_icon"
+    app:navigationIcon="@drawable/ic_action_name"
     app:title=""
     app:titleTextColor="#FFF"></android.support.v7.widget.Toolbar>
