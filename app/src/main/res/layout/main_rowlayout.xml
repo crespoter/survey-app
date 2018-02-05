@@ -3,33 +3,89 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardElevation="20dp"
-    android:layout_margin="10dp"
-    card_view:contentPadding="20dp"
+    android:layout_margin="5dp"
+    card_view:contentPadding="5dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              android:padding="5dp">
+              >
     <!--
     items for a single row of RecyclerView q
     -->
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher" />
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:elevation="12dp"
+        android:id="@+id/view2"
+        app:cardCornerRadius="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
+        <ImageView
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:id="@+id/image"
+            android:src="@drawable/send_icon"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+        </ImageView>
+    </android.support.v7.widget.CardView>
+
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:text="ABCD"
+        android:layout_gravity="top"
+        android:padding="1dp"
+        android:text="From:"
         android:textColor="#000"
-        android:textSize="20sp" />
-</LinearLayout>
+        android:textSize="15sp"
+        android:layout_toRightOf="@+id/view2"
+
+        />
+    <TextView
+        android:id="@+id/sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+       android:layout_below="@+id/name"
+        android:text="Topic:"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/view2"
+        />
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:layout_below="@+id/sub"
+        android:text=" Note:"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:layout_toRightOf="@+id/view2"
+        />
+    <TextView
+        android:id="@+id/tmestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Timestamp:"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
+
 </android.support.v7.widget.CardView>
