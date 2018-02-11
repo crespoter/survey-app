@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/survey-app.iml" filepath="$PROJECT_DIR$/survey-app.iml" />
       <module fileurl="file://F:\androidprojects\survey_iiits\survey-app.iml" filepath="F:\androidprojects\survey_iiits\survey-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/survey_iiits.iml" filepath="$PROJECT_DIR$/survey_iiits.iml" />
+      <module fileurl="file://F:\additionp\survey-app\survey_iiits.iml" filepath="F:\additionp\survey-app\survey_iiits.iml" />
     </modules>
   </component>
 </project>
