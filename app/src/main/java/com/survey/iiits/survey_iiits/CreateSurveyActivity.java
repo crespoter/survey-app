@@ -1,4 +1,6 @@
 package com.survey.iiits.survey_iiits;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 
 
 public class CreateSurveyActivity extends AppCompatActivity {
@@ -47,9 +50,33 @@ public class CreateSurveyActivity extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("HHERE", "onClick:CLICKED FOB");
-                adapter.addQuestion();
-                recyclerView.setAdapter(adapter);
+                AlertDialog.Builder alert = new AlertDialog.Builder(CreateSurveyActivity.this);
+
+                alert.setTitle("Questionair");
+                alert.setMessage("Question Need to be asked?");
+
+// Set an EditText view to get user input
+                final EditText input = new EditText(CreateSurveyActivity.this);
+                alert.setView(input);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        // Do something with value!
+                        adapter.addQuestion(input.getText());
+                        //adapter.questions.get(adapter.getItemCount()-1).question_details.
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
+
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+                //alertDialog.setIcon(R.drawable.icon);
+                alert.show();
+
             }
         });
     }
@@ -73,7 +100,6 @@ public class CreateSurveyActivity extends AppCompatActivity {
             fab1.setClickable(true);
             fab2.setClickable(true);
             isFabOpen = true;
-            Log.d("Raj","open");
 
         }
     }
