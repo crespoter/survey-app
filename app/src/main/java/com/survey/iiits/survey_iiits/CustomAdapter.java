@@ -16,12 +16,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     ArrayList personNames;
     ArrayList personImages;
+    ArrayList functions;
     Context context;
 
     public CustomAdapter(Context context, ArrayList personNames, ArrayList personImages) {
         this.context = context;
         this.personNames = personNames;
         this.personImages = personImages;
+        this.functions = null;
+    }
+
+    public CustomAdapter(Context context, ArrayList personNames, ArrayList personImages,ArrayList functions) {
+        this.context = context;
+        this.personNames = personNames;
+        this.personImages = personImages;
+        this.functions = functions;
     }
 
     @Override
@@ -46,6 +55,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 // open another activity on item click
                 Toast.makeText(context, (CharSequence) personNames.get(position),
                         Toast.LENGTH_SHORT).show();
+                if(functions != null)
+                {
+                    Log.d("CRESPOTER", "onClick: LOADING INTENT");
+                    Intent intent = new Intent(context,CreateSurveyActivity.class);
+                    context.startActivity(intent);
+                }
                 // Intent intent = new Intent(context, SecondActivity.class);
                // intent.putExtra("image", (Integer) personImages.get(position)); // put image data in Intent
                // context.startActivity(intent); // start Intent

@@ -22,7 +22,7 @@ public class SendSurvey extends Fragment {
     // ArrayList for person names
     ArrayList personNames = new ArrayList<>(Arrays.asList("Create New", "Choose from Draft"));
     ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.draft_icon, R.drawable.send_icon));
-
+    ArrayList functions = new ArrayList<>(Arrays.asList("_iiits_send_survey_create_survey", "Choose from Draft"));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class SendSurvey extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
 // call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(getActivity().getApplicationContext(), personNames,personImages);
+        CustomAdapter customAdapter = new CustomAdapter(getActivity().getApplicationContext(), personNames,personImages,functions);
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
 
         return myFragmentView;
