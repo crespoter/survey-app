@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); // get the reference of Toolbar
+        final Toolbar toolbar = findViewById(R.id.toolbar); // get the reference of Toolbar
+
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         Fragment def = new Home();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, def);
         transaction.commit();
         dLayout.closeDrawers();
-
+        toolbar.setTitle("Home");
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -51,18 +52,22 @@ public class MainActivity extends AppCompatActivity {
                 if (itemId == R.id.drawer_home)
                 {
                     frag = new Home();
+                    toolbar.setTitle("Home");
                 }
                 else if (itemId == R.id.drawer_send_survey)
                 {
                     frag = new SendSurvey();
+                    toolbar.setTitle("Send Survey");
                 }
                 else if (itemId == R.id.drawer_make_draft)
                 {
                     frag = new MakeDraft();
+                    toolbar.setTitle("Drafts");
                 }
                 else if (itemId == R.id.drawer_my_surveys)
                 {
                     frag = new My_Survey();
+                    toolbar.setTitle("My Surveys");
                 }
                 if (frag != null) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
