@@ -1,13 +1,13 @@
+/*
+    Authors : [David Christie,Shyam Sunder]
+    Last Edited : 4/12/2018
+ */
 package com.survey.iiits.survey_iiits;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,35 +19,34 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class SendSurvey extends Fragment {
-
-    // ArrayList for person names
     ArrayList personNames = new ArrayList<>(Arrays.asList());
 
     ArrayList draftid = new ArrayList<>(Arrays.asList());
-    ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.draft_icon));
     ArrayList functions = new ArrayList<>();
-    private RequestQueue mRequestQueue,mRequestQueue2;
-    private StringRequest mStringRequest,mStringRequest2;
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
+
+    public SendSurvey() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View myFragmentView = inflater.inflate(R.layout.drafts, container, false);
-// get the reference of RecyclerView
         mRequestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        mStringRequest = new StringRequest(Request.Method.GET, ipclass.url+"/api/getdrafts/1", new Response.Listener<String>() {
+        mStringRequest = new StringRequest(Request.Method.GET, ipclass.url+"/api/getdrafts/"+(new PrefManager(container.getContext()).getuserId()), new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                final List<String> players = new ArrayList<String>(); ;
                 JSONArray obj2=new JSONArray();
 
                 try {
@@ -64,33 +63,17 @@ public class SendSurvey extends Fragment {
                         y = (JSONObject) obj2.get(z);
                         personNames.add(y.getString("title"));
                         draftid.add(y.get("iddrafts"));
-                //        players.add(y.getString("choice"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
                 RecyclerView recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.recyclerView);
-// set a LinearLayoutManager with default vertical orientaion
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-                recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
-// call the constructor of CustomAdapter to send the reference and data to Adapter
-
-
+                recyclerView.setLayoutManager(linearLayoutManager);
                 Log.d("hai",personNames+"names");
-                CustomAdapter customAdapter = new CustomAdapter(getActivity().getApplicationContext(), personNames,personImages,functions,draftid);
-                recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
-
-
-//Log.d("hai",)
-                //                      players.add("hai");
-                //                    players.add("bye");
+                CustomAdapter customAdapter = new CustomAdapter(getActivity().getApplicationContext(), personNames,functions,draftid);
+                recyclerView.setAdapter(customAdapter);
                 Log.d("hai",response.toString()+"resp3");
-              //  list.add(new Model(Model.CHOICE_TYPE,question,R.drawable.add_icon,obj2.length(),players));
-
-
-                // Toast.makeText(getApplicationContext(),"Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -100,13 +83,6 @@ public class SendSurvey extends Fragment {
             }
         });
         mRequestQueue.add(mStringRequest);
-
-
-
-
-
-
-
         return myFragmentView;
     }
 }

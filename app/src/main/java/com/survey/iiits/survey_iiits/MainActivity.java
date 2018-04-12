@@ -1,3 +1,11 @@
+/*
+Authors : [David Christie,Shyam Sunder]
+Last Edited : 4/12/2018
+ */
+/*
+SHYAM SYNTAX:
+MAKE DRAFT IS COMPLETED SURVEYS,
+ */
 package com.survey.iiits.survey_iiits;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (itemId == R.id.drawer_send_survey)
                 {
                     frag = new SendSurvey();
-                    toolbar.setTitle("Send Draft's");
+                    toolbar.setTitle("Send Drafts");
                 }
                 else if (itemId == R.id.drawer_make_draft)
                 {

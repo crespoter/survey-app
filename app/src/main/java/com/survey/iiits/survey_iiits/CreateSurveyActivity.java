@@ -15,29 +15,29 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CreateSurveyActivity extends AppCompatActivity {
     createSurveyAdapter adapter;
     RecyclerView recyclerView;
-    DrawerLayout dLayout;
     private Boolean isFabOpen = false;
     private FloatingActionButton fab,fab1,fab2;
     ArrayList<Model> list2;
-    String inputLine;
-    private RequestQueue mRequestQueue,mRequestQueue2;
+    private RequestQueue mRequestQueue;
     private StringRequest mStringRequest,mStringRequest2;
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
     @Override
