@@ -4,35 +4,129 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Random;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Home extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     // ArrayList for person names
-    ArrayList personNames = new ArrayList<>(Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"));
+    ArrayList personNames = new ArrayList<>();
     ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.mine_icon, R.drawable.draft_icon, R.drawable.send_icon, R.drawable.mine_icon, R.drawable.menu_icon, R.drawable.home_icon, R.drawable.draft_icon));
+    ArrayList topic = new ArrayList<>();
+    ArrayList note = new ArrayList<>();
+    ArrayList timeStamp = new ArrayList<>();
+    ArrayList questionId = new ArrayList<>();
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View myFragmentView =inflater.inflate(R.layout.home, container, false);
+        final View myFragmentView =inflater.inflate(R.layout.home, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout) myFragmentView.findViewById(R.id.simpleSwipeRefreshLayout);
-        // get the reference of RecyclerView
+
+
+
+
+        mRequestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        //String Request initialized
+        mStringRequest = new StringRequest(Request.Method.GET, ipclass.url+"/api/getquestionnaire/foruser/1", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONArray obj = new JSONArray();
+                try {
+                    obj = new JSONArray(response.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                int i;
+                for(i=0; i< obj.length(); i++) {
+                    JSONObject x = new JSONObject();
+                    try {
+                        x = (JSONObject) obj.get(i);
+                        personNames.add(x.get("username"));
+                        topic.add(x.get("title"));
+                        note.add(x.get("note"));
+                        timeStamp.add(x.get("timestamppost"));
+                        questionId.add(x.get("idquestionnaire")+"");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+               // personNames.add("username");
+              //  topic.add("title");
+               // note.add("note");
+///                Log.d("hai",response.toString()+"home");
+              //  Toast.makeText(getAp,"Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
+                recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.recyclerView);
+                // set a LinearLayoutManager with default vertical orientation
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                recyclerView.setLayoutManager(linearLayoutManager);
+                // call the constructor of CustomAdapter to send the reference and data to Adapter
+
+                HomeAdapter homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), personNames, personImages,topic,note,timeStamp,questionId);
+                recyclerView.setAdapter(homeAdapter); // set the Adapter to RecyclerView
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("HAI","Error :" + error.toString());
+            }
+        });
+
+        mRequestQueue.add(mStringRequest);
+
+
+
+
+
+
+
+
+       /* personNames.add("username");
+        topic.add("title");
+        note.add("note");
+        timeStamp.add("timestamppost");
+questionId.add("1");
+        //  Toast.makeText(getAp,"Response :" + response.toString(), Toast.LENGTH_LONG).show();//display the response on screen
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.recyclerView);
         // set a LinearLayoutManager with default vertical orientation
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         // call the constructor of CustomAdapter to send the reference and data to Adapter
-        HomeAdapter homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), personNames, personImages);
+
+        HomeAdapter homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), personNames, personImages,topic,note,timeStamp,questionId);
         recyclerView.setAdapter(homeAdapter); // set the Adapter to RecyclerView
+*/
+
+
+
+
+        // get the reference of RecyclerView
         // implement setOnRefreshListener event on SwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -50,10 +144,10 @@ public class Home extends Fragment {
     }
     public void shuffleItems() {
         // shuffle the ArrayList's items and set the adapter
-        Collections.shuffle(personNames, new Random(System.currentTimeMillis()));
-        Collections.shuffle(personImages, new Random(System.currentTimeMillis()));
+        //Collections.shuffle(personNames, new Random(System.currentTimeMillis()));
+       // Collections.shuffle(personImages, new Random(System.currentTimeMillis()));
         // call the constructor of CustomAdapter to send the reference and data to Adapter
-        HomeAdapter homeAdapter = new HomeAdapter(getActivity().getApplicationContext(), personNames, personImages);
-        recyclerView.setAdapter(homeAdapter); // set the Adapter to RecyclerView
+      //  HomeAdapter homeAdapter = new HomeAdapter(, personNames, personImages);
+        //recyclerView.setAdapter(homeAdapter); // set the Adapter to RecyclerView
     }
 }

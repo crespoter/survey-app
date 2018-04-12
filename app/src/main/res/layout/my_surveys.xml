@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.survey.iiits.survey_iiits.My_Survey">
-    <TextView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_mysurvey"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="MY SURVEYS"
-        android:textSize="25sp" />
+        android:layout_height="match_parent" />
 </FrameLayout>

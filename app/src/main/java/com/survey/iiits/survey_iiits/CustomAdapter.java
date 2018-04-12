@@ -17,6 +17,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     ArrayList personNames;
     ArrayList personImages;
     ArrayList functions;
+    ArrayList draftid;
+
     Context context;
 
     public CustomAdapter(Context context, ArrayList personNames, ArrayList personImages) {
@@ -24,13 +26,22 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.personNames = personNames;
         this.personImages = personImages;
         this.functions = null;
+        this.draftid=null;
+    }
+    public CustomAdapter(Context context, ArrayList personNames, ArrayList personImages,ArrayList draftid) {
+        this.context = context;
+        this.personNames = personNames;
+        this.personImages = personImages;
+        this.functions = null;
+        this.draftid=draftid;
     }
 
-    public CustomAdapter(Context context, ArrayList personNames, ArrayList personImages,ArrayList functions) {
+    public CustomAdapter(Context context, ArrayList personNames, ArrayList personImages,ArrayList functions,ArrayList draftid) {
         this.context = context;
         this.personNames = personNames;
         this.personImages = personImages;
         this.functions = functions;
+        this.draftid=draftid;
     }
 
     @Override
@@ -47,18 +58,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 // set the data in items
         Log.d("hai", (String) personNames.get(position));
         holder.name.setText((CharSequence) personNames.get(position));
-        holder.image.setImageResource((Integer) personImages.get(position));
+        holder.image.setImageResource((Integer) personImages.get(0));
 // implement setOnClickListener event on item view.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 // open another activity on item click
-                Toast.makeText(context, (CharSequence) personNames.get(position),
-                        Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context, (CharSequence) personNames.get(position),
+                 //       Toast.LENGTH_SHORT).show();
                 if(functions != null)
                 {
-                    Log.d("CRESPOTER", "onClick: LOADING INTENT");
+                    Log.d("hai", draftid.get(position)+"draft");
                     Intent intent = new Intent(context,CreateSurveyActivity.class);
+                    intent.putExtra("draftid",draftid.get(position)+"");
+                    intent.putExtra("secondKeyName","SecondKeyValue");
                     context.startActivity(intent);
                 }
                 // Intent intent = new Intent(context, SecondActivity.class);

@@ -13,16 +13,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <EditText
-            android:id="@+id/createsurveyelement_question"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Question" />
+            android:text="TextView"/>
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:inputType="textMultiLine"/>
 
 
     </RelativeLayout>

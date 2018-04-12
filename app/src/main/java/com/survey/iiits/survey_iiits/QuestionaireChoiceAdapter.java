@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapter.MyViewHolder> implements View.OnClickListener{
+public class QuestionaireChoiceAdapter extends RecyclerView.Adapter<QuestionaireChoiceAdapter.MyViewHolder> implements View.OnClickListener{
     ArrayList<Question> questions;
     Context context;
     private ViewGroup mParent;
@@ -44,12 +44,12 @@ public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapte
         mRecyclerView = recyclerView;
     }
 
-    public void addQuestion(Editable text) {
+    public void addQuestion(String text) {
         questions.add(new Question());
         writerquestions.add(new String(String.valueOf(text)));
     }
 
-    public createSurveyAdapter(Context context) {
+    public QuestionaireChoiceAdapter(Context context) {
         this.context = context;
         questions = new ArrayList<Question>();
         writerquestions = new ArrayList<String>();
@@ -85,13 +85,13 @@ public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapte
     @Override
     public void onClick(View view) {
 //Toast.makeText(this,"dsasdad",Toast.LENGTH_SHORT).show();
-      //  Toast.makeText(view.getContext(), "position = " +view.getContext(), Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(view.getContext(), "position = " +view.getContext(), Toast.LENGTH_SHORT).show();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView image;
-
+        Button btnok;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -103,8 +103,8 @@ public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapte
 
         }
 
-        }
-
-
     }
+
+
+}
 

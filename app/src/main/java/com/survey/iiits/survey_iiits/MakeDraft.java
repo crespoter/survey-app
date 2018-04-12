@@ -20,7 +20,7 @@ import java.util.Arrays;
 public class MakeDraft extends Fragment {
 
     // ArrayList for person names
-    ArrayList personNames = new ArrayList<>(Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7"));
+    ArrayList personNames = new ArrayList<>(Arrays.asList("Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5", "Topic 6", "Topic 7"));
     ArrayList personImages = new ArrayList<>(Arrays.asList(R.drawable.home_icon, R.drawable.draft_icon, R.drawable.menu_icon, R.drawable.send_icon, R.drawable.menu_icon, R.drawable.mine_icon, R.drawable.send_icon));
 
 

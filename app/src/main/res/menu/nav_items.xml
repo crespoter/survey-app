@@ -8,14 +8,14 @@
         <item
             android:id="@+id/drawer_send_survey"
             android:icon="@drawable/send_icon"
-            android:title="Send Survey" />
+            android:title="Send Drafts's" />
         <item
             android:id="@+id/drawer_make_draft"
             android:icon="@drawable/draft_icon"
-            android:title="Make Draft" />
+            android:title="Completed Survey's" />
         <item
             android:id="@+id/drawer_my_surveys"
             android:icon="@drawable/mine_icon"
-            android:title="My Surveys" />
+            android:title="Pending Surveys" />
     </group>
 </menu>

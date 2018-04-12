@@ -4,18 +4,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Toolbar toolbar = findViewById(R.id.toolbar); // get the reference of Toolbar
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -37,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         dLayout = findViewById(R.id.drawer_layout);
-        NavigationView navView = (NavigationView) findViewById(R.id.navigation);
+        NavigationView navView = findViewById(R.id.navigation);
         Fragment def = new Home();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, def);
@@ -57,17 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 else if (itemId == R.id.drawer_send_survey)
                 {
                     frag = new SendSurvey();
-                    toolbar.setTitle("Send Survey");
+                    toolbar.setTitle("Send Draft's");
                 }
                 else if (itemId == R.id.drawer_make_draft)
                 {
                     frag = new MakeDraft();
-                    toolbar.setTitle("Drafts");
+                    toolbar.setTitle("Completed Survey's");
                 }
                 else if (itemId == R.id.drawer_my_surveys)
                 {
                     frag = new My_Survey();
-                    toolbar.setTitle("My Surveys");
+                    toolbar.setTitle("Pending Survey's");
                 }
                 if (frag != null) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
