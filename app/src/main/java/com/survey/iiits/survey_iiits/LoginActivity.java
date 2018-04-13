@@ -41,13 +41,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
-    private RequestQueue mRequestQueue;
-    private StringRequest mStringRequest;
     private String url = "http://www.mocky.io/v2/597c41390f0000d002f4dbd1";
     private EditText mEmailView;
     private EditText mPasswordView;
     private String TAG = "Crespoter";
-    private CheckBox checkBoxRememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

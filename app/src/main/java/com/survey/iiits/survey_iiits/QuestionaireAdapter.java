@@ -20,6 +20,7 @@ public class QuestionaireAdapter extends RecyclerView.Adapter {
 
 
     public ArrayList<Model>dataSet;
+    private boolean editableText;
     private ArrayList<ChoiceTypeViewHolder> setViewHolders = new ArrayList<>();
     public static class ChoiceTypeViewHolder extends RecyclerView.ViewHolder {
         TextView txtType;
@@ -34,11 +35,19 @@ public class QuestionaireAdapter extends RecyclerView.Adapter {
             this.r[3]=(RadioButton)itemView.findViewById(R.id.radioButton4);
             this.r[4]=(RadioButton)itemView.findViewById(R.id.radioButton5);
             this.r[5]=(RadioButton)itemView.findViewById(R.id.radioButton6);
+
         }
     }
 
     public QuestionaireAdapter(ArrayList<Model>data, Context context) {
+
         this.dataSet = data;
+        this.editableText = true;
+    }
+    public QuestionaireAdapter(ArrayList<Model>data,Context context,boolean editableText)
+    {
+        this.dataSet = data;
+        this.editableText = editableText;
     }
 
     @Override
@@ -57,11 +66,13 @@ public class QuestionaireAdapter extends RecyclerView.Adapter {
             ((ChoiceTypeViewHolder) holder).txtType.setText(object.text);
             int num=object.choice_number;
             for (int i=num;i<6;i++) {
+
                 ((ChoiceTypeViewHolder) holder).r[i].setVisibility(View.GONE);
 
             }
             for (int i=0;i<num;i++) {
                 ((ChoiceTypeViewHolder) holder).r[i].setText(object.choices.get(i));
+                ((ChoiceTypeViewHolder) holder).r[i].setEnabled(editableText);
             }
 
 
@@ -75,6 +86,5 @@ public class QuestionaireAdapter extends RecyclerView.Adapter {
     {
         return dataSet.get(i).qid;
     }
-
 
 }

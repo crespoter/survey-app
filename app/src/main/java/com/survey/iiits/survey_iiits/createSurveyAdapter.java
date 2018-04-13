@@ -29,24 +29,13 @@ import java.util.List;
 public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapter.MyViewHolder> implements View.OnClickListener{
     ArrayList<Question> questions;
     Context context;
-    private ViewGroup mParent;
     ArrayList<String> writerquestions;
     RecyclerView mRecyclerView;
-
-    EditText textIn;
-    Button buttonAdd;
-    LinearLayout container;
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-
         mRecyclerView = recyclerView;
-    }
-
-    public void addQuestion(Editable text) {
-        questions.add(new Question());
-        writerquestions.add(new String(String.valueOf(text)));
     }
 
     public createSurveyAdapter(Context context) {
@@ -60,9 +49,6 @@ public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapte
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.createsurveyformelement, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
-        mParent = parent;
-
-
         return vh;
     }
 
@@ -84,8 +70,6 @@ public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapte
 
     @Override
     public void onClick(View view) {
-//Toast.makeText(this,"dsasdad",Toast.LENGTH_SHORT).show();
-      //  Toast.makeText(view.getContext(), "position = " +view.getContext(), Toast.LENGTH_SHORT).show();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -96,8 +80,6 @@ public class createSurveyAdapter extends RecyclerView.Adapter<createSurveyAdapte
         public MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.editText);
-
-            image = (ImageView) itemView.findViewById(R.id.image);
 
 
 
