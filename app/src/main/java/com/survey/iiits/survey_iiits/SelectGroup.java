@@ -24,8 +24,6 @@ public class SelectGroup extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
 
-    ArrayList personNames = new ArrayList<>(Arrays.asList("Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7","Person 8", "Person 9", "Person 10", "Person 11", "Person 12", "Person 13", "Person 14"));
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

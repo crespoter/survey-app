@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.survey.iiits.survey_iiits.My_Survey">
+    tools:context="com.survey.iiits.survey_iiits.Pending_Survey">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_mysurvey"

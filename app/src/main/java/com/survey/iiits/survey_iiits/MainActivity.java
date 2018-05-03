@@ -7,6 +7,7 @@ SHYAM SYNTAX:
 MAKE DRAFT IS COMPLETED SURVEYS,
  */
 package com.survey.iiits.survey_iiits;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -34,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
                 dLayout.openDrawer(Gravity.LEFT);
             }
         });
+        Intent serviceIntent = new Intent(getBaseContext(), NewSurveyCheckerService.class);
+        startService(serviceIntent);
 
 
-
-        dLayout = findViewById(R.id.drawer_layout);
-        NavigationView navView = findViewById(R.id.navigation);
+        dLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        NavigationView navView = (NavigationView) findViewById(R.id.navigation);
         Fragment def = new Home();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, def);
@@ -62,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (itemId == R.id.drawer_make_draft)
                 {
-                    frag = new MakeDraft();
+                    frag = new Completed_Surveys();
                     toolbar.setTitle("Completed Survey's");
                 }
                 else if (itemId == R.id.drawer_my_surveys)
                 {
-                    frag = new My_Survey();
-                    toolbar.setTitle("Pending Survey's");
+                    frag = new Pending_Survey();
+                    toolbar.setTitle("Pending Surveys");
                 }
                 if (frag != null) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
