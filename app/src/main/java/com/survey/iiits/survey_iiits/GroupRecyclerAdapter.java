@@ -31,12 +31,16 @@ import java.util.ArrayList;
 public class GroupRecyclerAdapter extends RecyclerView.Adapter{
     private ArrayList<String> groupNames,groupIds;
     private String draftid;
+    private  String anonymous;
+    private String forcedResponse;
     private Context context;
-    public GroupRecyclerAdapter(Context context, ArrayList<String> groupNames,ArrayList<String> groupIds,String draftid) {
+    public GroupRecyclerAdapter(Context context, ArrayList<String> groupNames,ArrayList<String> groupIds,String draftid,String anonymous,String forcedResponse) {
         this.context = context;
         this.groupNames = groupNames;
         this.groupIds = groupIds;
         this.draftid = draftid;
+        this.anonymous = anonymous;
+        this.forcedResponse = forcedResponse;
     }
 
     @Override
@@ -53,8 +57,7 @@ public class GroupRecyclerAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View view) {
                 RequestQueue mRequestQueue = Volley.newRequestQueue(context);
-                StringRequest mStringRequest = new StringRequest(Request.Method.GET, ipclass.url+"/api/sendquestionnaire/"+groupIds.get(position)+"?id="+draftid, new Response.Listener<String>() {
-
+                StringRequest mStringRequest = new StringRequest(Request.Method.GET, ipclass.url+"/api/sendquestionnaire/"+groupIds.get(position)+"?id="+draftid+"&anonymous="+anonymous+"&forcedResponse="+forcedResponse, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Intent mainPage = new Intent(context,MainActivity.class);

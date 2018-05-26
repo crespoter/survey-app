@@ -62,11 +62,15 @@ public class CreateSurveyActivity extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String draftId = getdraftid;
-            Intent viewGroups = new Intent(view.getContext(),SelectGroup.class);
-            viewGroups.putExtra("draft_id",draftId);
-            startActivity(viewGroups);
-            finish();
+                String draftId = getdraftid;
+               // Intent viewGroups = new Intent(view.getContext(),SelectGroup.class);
+                //viewGroups.putExtra("draft_id",draftId);
+                //startActivity(viewGroups);
+
+                Intent setPreference = new Intent(view.getContext(),surveyPreference.class);
+                setPreference.putExtra("draft_id",draftId);
+                startActivity(setPreference);
+                finish();
             }
         });
 

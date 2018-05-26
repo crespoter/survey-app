@@ -32,6 +32,9 @@ public class SelectGroup extends AppCompatActivity {
 
 
         final String draftId = getIntent().getStringExtra("draft_id");
+        final String anonymous = getIntent().getStringExtra("anonymous");
+        final String forcedResponse = getIntent().getStringExtra("forcedResponse");
+
         mRequestQueue = Volley.newRequestQueue(this);
         mStringRequest = new StringRequest(Request.Method.GET, ipclass.url+"/api/getgroups", new Response.Listener<String>() {
 
@@ -54,7 +57,7 @@ public class SelectGroup extends AppCompatActivity {
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.selectgroup_recyclerView);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(linearLayoutManager);
-                GroupRecyclerAdapter customAdapter = new GroupRecyclerAdapter(getApplicationContext(), groupNames,groupIds,draftId);
+                GroupRecyclerAdapter customAdapter = new GroupRecyclerAdapter(getApplicationContext(), groupNames,groupIds,draftId,anonymous,forcedResponse);
                 recyclerView.setAdapter(customAdapter);
                 Log.d("CRESPOTER", "onResponse: " + response);
             }

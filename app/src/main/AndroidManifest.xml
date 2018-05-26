@@ -38,7 +38,8 @@
 
         <service android:name=".NewSurveyCheckerService" />
 
-        <activity android:name=".PendingSurveyDetailActivity"></activity>
+        <activity android:name=".PendingSurveyDetailActivity" />
+        <activity android:name=".surveyPreference"></activity>
     </application>
 
 </manifest>

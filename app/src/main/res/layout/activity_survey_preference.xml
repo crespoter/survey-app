@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.survey.iiits.survey_iiits.surveyPreference">
+
+    <CheckBox
+        android:id="@+id/forcedResponseCheckbox"
+        android:layout_width="338dp"
+        android:layout_height="58dp"
+        android:text="Forced Response"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="223dp" />
+
+    <CheckBox
+        android:id="@+id/anonymousCheckbox"
+        android:layout_width="241dp"
+        android:layout_height="70dp"
+        android:text="Anonymous"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <Button
+        android:id="@+id/surveyPreferenceSubmit"
+        android:layout_width="207dp"
+        android:layout_height="59dp"
+        android:text="Send"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="402dp" />
+
+</android.support.constraint.ConstraintLayout>
