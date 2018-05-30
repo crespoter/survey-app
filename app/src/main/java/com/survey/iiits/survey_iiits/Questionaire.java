@@ -1,6 +1,9 @@
 package com.survey.iiits.survey_iiits;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,8 +11,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.LoginFilter;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RadioGroup;
@@ -48,10 +55,18 @@ public class Questionaire extends Activity {
     private StringRequest mStringRequest,mStringRequest2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.questionaire);
         Intent myIntent = getIntent();
         String questionnaireId = myIntent.getStringExtra("firstKeyName");
+        Intent intent = new Intent(Questionaire.this, NewSurveyCheckerService.class);
+
+        stopService(intent);
+
 
         final ArrayList<Model> list= new ArrayList();
         final QuestionaireAdapter adapter = new QuestionaireAdapter(list,this);
@@ -201,6 +216,9 @@ public class Questionaire extends Activity {
 
                         }
                     }
+
+                  //  Intent serviceIntent = new Intent(getBaseContext(), NewSurveyCheckerService.class);
+                    //getBaseContext().startService(serviceIntent);
                 }
                 else
                 {
@@ -232,5 +250,19 @@ public class Questionaire extends Activity {
             isFabOpen = true;
 
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        activityManager.moveTaskToFront(getTaskId(), 0);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // Do nothing or catch the keys you want to block
+        return false;
     }
 }

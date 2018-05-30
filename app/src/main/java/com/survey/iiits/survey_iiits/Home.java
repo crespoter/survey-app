@@ -1,4 +1,6 @@
 package com.survey.iiits.survey_iiits;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -86,7 +88,11 @@ public class Home extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(false);
-                shuffleItems();
+                Intent i = new Intent(getActivity(), MainActivity.class);
+
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0,0);
+         //       shuffleItems();
             }
         });
 
@@ -96,6 +102,7 @@ public class Home extends Fragment {
 
     }
     public void shuffleItems() {
-
+      //  Intent intent = getIntent();
+     //   finish();
     }
 }

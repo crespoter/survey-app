@@ -4,7 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+<uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,7 +28,13 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".Questionaire"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"  >
+<intent-filter>
+    <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+</intent-filter>
+        </activity>
         <activity android:name=".CreateSurveyActivity">
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -35,7 +44,7 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity android:name=".SelectGroup" />
-
+<activity android:name=".Home"/>
         <service android:name=".NewSurveyCheckerService" />
 
         <activity android:name=".PendingSurveyDetailActivity" />

@@ -38,7 +38,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         // set the data in items
         holder.name.setText((CharSequence) personNames.get(position));
-        holder.image.setImageResource((Integer) personImages.get(position));
+        int x=position%7;
+        holder.image.setImageResource((Integer) personImages.get(x                                                                                                                                                                                                                                              ));
         holder.sub.setText((CharSequence)topic.get(position));
         holder.note.setText((CharSequence)note.get(position));
         holder.timestamp.setText((CharSequence)timeStamp.get(position));
