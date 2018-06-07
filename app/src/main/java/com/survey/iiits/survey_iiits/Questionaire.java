@@ -64,7 +64,7 @@ public class Questionaire extends Activity {
         Intent myIntent = getIntent();
         String questionnaireId = myIntent.getStringExtra("firstKeyName");
         Intent intent = new Intent(Questionaire.this, NewSurveyCheckerService.class);
-
+Log.d("hai","questionaire"+questionnaireId);
         stopService(intent);
 
 
