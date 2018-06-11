@@ -3,6 +3,9 @@
     Date : 4/12/2018
  */
 package com.survey.iiits.survey_iiits;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,9 +16,12 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -62,15 +68,63 @@ public class CreateSurveyActivity extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String draftId = getdraftid;
+                final String draftId = getdraftid;
                // Intent viewGroups = new Intent(view.getContext(),SelectGroup.class);
                 //viewGroups.putExtra("draft_id",draftId);
                 //startActivity(viewGroups);
+                final CharSequence[] items = {"Anonymous"," Force"};
+// arraylist to keep the selected items
+                final ArrayList seletedItems=new ArrayList();
+                AlertDialog dialog = new AlertDialog.Builder(CreateSurveyActivity.this)
+                        .setTitle("Select respnse type(only official use)")
+                        .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                                if (isChecked) {
+                                    // If the user checked the item, add it to the selected items
+                                    seletedItems.add(indexSelected);
+                                } else if (seletedItems.contains(indexSelected)) {
+                                    // Else, if the item is already in the array, remove it
+                                    seletedItems.remove(Integer.valueOf(indexSelected));
+                                }
+                            }
+                        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Your code when user clicked on OK
+                                //  You can write the code  to save the selected item here
+                               // String draft_id="0";
+                                String anonymous="0";
+                                String forcedResponse="0";
+                                if(seletedItems.contains(1)==true)
+                                {
+                                 forcedResponse="1";
+                                }
+                                if(seletedItems.contains(0)==true)
+                                {
+                                    anonymous="1";
+                                }
 
-                Intent setPreference = new Intent(view.getContext(),surveyPreference.class);
-                setPreference.putExtra("draft_id",draftId);
-                startActivity(setPreference);
-                finish();
+                                Intent viewGroups = new Intent(CreateSurveyActivity.this,SelectGroup.class);
+
+                                viewGroups.putExtra("draft_id",draftId);
+                                viewGroups.putExtra("anonymous",anonymous);
+                                viewGroups.putExtra("forcedResponse",forcedResponse);
+                                startActivity(viewGroups);
+
+                                Log.d("hai",seletedItems.toString());
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                //  Your code when user clicked on Cancel
+                            }
+                        }).create();
+                dialog.show();
+              //  Intent setPreference = new Intent(view.getContext(),surveyPreference.class);
+              //  setPreference.putExtra("draft_id",draftId);
+                //startActivity(setPreference);
+               // finish();
             }
         });
 

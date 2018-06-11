@@ -18,12 +18,12 @@ public class surveyPreference extends AppCompatActivity {
         submitButton.setOnClickListener( new View.OnClickListener()
         {
             public void onClick (View v){
-                Intent viewGroups = new Intent(v.getContext(),SelectGroup.class);
                 CheckBox anonymousCheckbox,forcedResponseCheckbox;
                 anonymousCheckbox = (CheckBox) findViewById(R.id.anonymousCheckbox);
                 forcedResponseCheckbox = (CheckBox) findViewById(R.id.forcedResponseCheckbox);
                 String anonymous = anonymousCheckbox.isChecked()?"1":"0";
                 String forcedResponse = forcedResponseCheckbox.isChecked()?"1":"0";
+                Intent viewGroups = new Intent(v.getContext(),SelectGroup.class);
 
                 viewGroups.putExtra("draft_id",draft_id);
                 viewGroups.putExtra("anonymous",anonymous);

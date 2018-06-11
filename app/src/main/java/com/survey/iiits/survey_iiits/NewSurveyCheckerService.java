@@ -13,17 +13,24 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import android.view.WindowManager;
 import android.widget.Toast;
+import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,12 +143,19 @@ public class NewSurveyCheckerService extends Service {
         protected void onPostExecute(String s) {
             int messageNumber = 0;
             int countnum=0;
+           // ArrayList<Intent>=new ArrayList<>()
             for(int i=0;i<messages.size();i++)
             {
-               if(messages.get(i).forcedResponse==0){ Intent intent = new Intent(getBaseContext(), Questionaire.class);
+               if(messages.get(i).forcedResponse==0){
+
+                   Intent intent = new Intent(getBaseContext(), Questionaire.class);
                 intent.putExtra("firstKeyName","" + messages.get(i).id);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                PendingIntent pIntent = PendingIntent.getActivity(NewSurveyCheckerService.this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                   Date now = new Date(); long uniqueId = now.getTime();//use date to generate an unique id to differentiate the notifications.
+
+                   intent.setAction("com.sample.myapp" + uniqueId);
+                PendingIntent pIntent = PendingIntent.getActivity(NewSurveyCheckerService.this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
                 String CHANNEL_ID = "my_channel_01";
                 Notification n  = new Notification.Builder(NewSurveyCheckerService.this)
                         .setContentText("New Survey from : " + messages.get(i).senderName)
@@ -155,7 +169,9 @@ public class NewSurveyCheckerService extends Service {
                         (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 messageNumber++;
                 notificationManager.notify(messageNumber, n);
-            }else {
+
+
+               }else {
                    if (countnum == 0) {
                        countnum++;
                        final int temp = i;
